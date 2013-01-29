@@ -1,0 +1,22 @@
+<include file="public:header" />
+<div id="mainContent" class="wrapper">
+	<div class="column clearfix">
+		<h2>{:L('tools_category_index')}</h2>
+		<div class="tool_index clearfix">
+			<foreach name="data_list" item='data' key='mod'>
+				<ul class="nav nav-list nav-stacked {$mod}">
+					<li><strong><a href="#">{$data.title}</a></strong></li>
+					<li class="divider"></li>
+					<if condition="$data.data neq ''">
+						<foreach name="data.data" item="val">
+							<li>
+								<a href="{:u($mod.'/'.$val['act'])}">{$val.title}</a>
+							</li>
+						</foreach>
+					</if>
+				</ul>
+			</foreach>
+		</div>
+	</div>
+</div>
+<include file="public:footer" />

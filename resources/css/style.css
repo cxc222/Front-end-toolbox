@@ -1,0 +1,99 @@
+@CHARSET "UTF-8";
+#header {height: 50px;position: relative;z-index: 1; width: 100%; background: #006CBF; -webkit-box-shadow:0 3px 4px #C7D9E1; -moz-box-shadow:0 3px 4px #C7D9E1; box-shadow: 0 3px 4px #C7D9E1}
+.wrapper {margin: 0 auto;width: 1000px;}
+.texthidden {
+    line-height: 0;
+    text-indent: -9999px;
+    white-space: nowrap;
+}
+
+#logo {
+    background: url("../img/logo.gif") no-repeat scroll 0 0 transparent;
+    cursor: pointer;
+    height: 50px;
+    line-height: 50px;
+    width: 250px;
+}
+#logo h1{margin:0px; }
+#mainContent {}
+.column{margin:10px 0 0 0;}
+.column h2 {
+    color: #006CBF;
+    font-size: 24px;
+}
+.tool_index ul {
+    display: inline-block;
+    margin: 10px 9px;
+    padding: 0;
+    width: 144px;
+}
+
+.tool_index ul strong {
+    font-size: 12.5pt;
+    margin-left: 0;
+}
+
+.toolName {
+    color: #777777;
+    font-size: 24px;
+    line-height: 24px;
+    margin-top: 10px;
+}
+.toolUsing{margin:30px 0 0 0;}
+.leftBar {
+    float: left;
+}
+.rightBar {
+    float: right;
+}
+.leftBar textarea, .rightBar textarea {
+    height: 500px;
+    width: 410px;
+}
+.Code {
+    border: 1px solid #CCCCCC;
+    height: 610px;
+    overflow-x: hidden;
+    width: 430px;
+}
+.CodeMirror {
+    min-height: 610px;
+    width: 430px;
+}
+.CodeMirror-scroll {
+    height: auto;
+    overflow: hidden;
+}
+.well {
+    background-color: #F5F5F5;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
+    margin-bottom: 20px;
+    min-height: 20px;
+    padding: 19px;
+}
+.well blockquote {
+    border-color: rgba(0, 0, 0, 0.15);
+}
+.well-large {
+    border-radius: 6px 6px 6px 6px;
+    padding: 24px;
+}
+.well-small {
+    border-radius: 3px 3px 3px 3px;
+    padding: 9px;
+}
+.operateLR {
+    float: left;
+    margin: 30px 5px 0;
+    text-align: center;
+    width: 136px;
+}
+.leftBar textarea, .rightBar textarea {
+    height: 500px;
+    width: 410px;
+}
+#mainContent textarea, #mainContent input[type="text"] {
+    border: 1px solid #CCCCCC;
+}
