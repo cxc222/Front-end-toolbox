@@ -80,13 +80,14 @@ function echo(stringA,stringB){
 		var linebreakpos=$("#linebreak").val();
 		$.post("{:U('js_list/jscompress')}", {munge:munge, linebreakpos:linebreakpos, js:js}, function(json){
 			$("#js_com").button("reset");
-				if(json.msg){
-					$('#error_msg').html(json.msg);
+				console.log(json);
+				if(json.info){
+					$('#error_msg').html(json.info);
 					$('#error_msg').show();
 				}
-				else if(json.result){
+				else if(json.data){
 					$('#error_msg').hide();
-					$("#result").val(json.result);
+					$("#result").val(json.data);
 				}
 		}, "json");
 	}
