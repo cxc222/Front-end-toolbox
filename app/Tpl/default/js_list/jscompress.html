@@ -1,7 +1,7 @@
 <include file="public:header" />
 <div id="mainContent" class="wrapper">
 	<div class="toolName">
-		在线JS/CSS/HTML压缩(采用<a id="YUI" href="http://www.oschina.net/p/yui+compressor" data-original-title="">YUI Compressor</a>实现)
+		在线JS/CSS/HTML压缩(采用<a id="YUI" href="#####" data-original-title="">YUI Compressor</a>实现)
 	</div>
 	<div class="toolUsing clearfix">
 		<div class="toolsTab clearfix">
@@ -80,7 +80,6 @@ function echo(stringA,stringB){
 		var linebreakpos=$("#linebreak").val();
 		$.post("{:U('js_list/jscompress')}", {munge:munge, linebreakpos:linebreakpos, js:js}, function(json){
 			$("#js_com").button("reset");
-				console.log(json);
 				if(json.info){
 					$('#error_msg').html(json.info);
 					$('#error_msg').show();
@@ -95,17 +94,19 @@ function echo(stringA,stringB){
 		$("#css_com").button("loading");
 		var css = editor.getValue();
 		var linebreakpos=$("#linebreak").val();
-		ajax_post("/action/jscompress/css_compress"+"?linebreakpos="+linebreakpos,css,function(html){
-		$("#css_com").button("reset");
-		var json = eval('(' + html + ')');
-			if(json.msg){
-				$('#error_msg').html(json.msg);
-				$('#error_msg').show();
-			}
-			else if(json.result)
-				$('#error_msg').hide();
-				$("#result").val(json.result);
-		});
+		
+		$.post("{:U('js_list/jscompress')}", {linebreakpos:linebreakpos, css:css}, function(json){
+			$("#css_com").button("reset");
+				if(json.info){
+					$('#error_msg').html(json.info);
+					$('#error_msg').show();
+				}
+				else if(json.data){
+					$('#error_msg').hide();
+					$("#result").val(json.data);
+				}
+		}, "json");
+		
 	}
 	</script>
 </div>
