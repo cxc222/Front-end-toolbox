@@ -13,11 +13,14 @@ class js_listAction extends baseAction {
     }
     
     //压缩js 或者 css代码
+    //注意 java的jdk路径
     public function jscompress(){
     	if ($this->isPost()) {
+    		ini_set('memory_limit','-1');
+    		$data = array('status' => 0, 'data'=>null, 'info'=> null);
+    		
     		if($_POST['js']){
-    			$data = array('status'=>0, 'data'=>null, 'info'=> null);
-    			ini_set('memory_limit','-1');
+    			
     			$filename = time();
     			$path = ROOT_PATH."/temp/js/".$filename.".js";
     			$fp = fopen($path,"w+");
@@ -32,12 +35,13 @@ class js_listAction extends baseAction {
     					'save_path'=> ROOT_PATH."/temp/js/", //必须有可写权限
     					// -------- 全局设置 --------- //
     					'charset'=>'utf-8', //文件的编码
-    					'line-break'=>false, //在指定的列后插入一个 line-bread 符号
+    					'line-break'=>$_POST['linebreak'] ? $_POST['linebreak'] : false, //在指定的列后插入一个 line-bread 符号
     					// -------- javascript 代码的配置选项 --------- //
-    					'nomunge'=>false,  //只是简单压缩，清除空行空格注释等。
+    					'nomunge'=>$_POST['munge']? true:false,  //只是简单压缩，清除空行空格注释等。
     					'semi'=>false, //保留所有的分号
     					'optimizations'=>false, //禁止优化代码.
     			));
+    			
     			$resutlt = $yui->compress($path);
     			if($resutlt['status'] == 0 && $resutlt['success']){
     				$file = file_get_contents($resutlt['success']);
@@ -48,9 +52,22 @@ class js_listAction extends baseAction {
     			@unlink($path);
     			@unlink($resutlt['success']);
     			$this->ajaxReturn($data);
+    		}elseif($_POST['css']){
+    			
     		}
     		
     	}
     	$this->display();
+    }
+    
+    //调试 
+    function c_debug(){
+    	$de = "D:/xampp/htdocs/Front-end-toolbox/jar/jdk1.7.0_09/bin/java.exe -jar D:/xampp/htdocs/Front-end-toolbox/jar/yuicompressor-2.4.7.jar --type js --charset utf-8 D:/xampp/htdocs/Front-end-toolbox/temp/js/1359516817.js > D:/xampp/htdocs/Front-end-toolbox/temp/js/1359516817.min.js";
+    	$a = exec($de.' 2>&1',$out, $status);
+    	
+    	print_r($a);
+    	print_r($out);
+    	print_r($status);
+    	die();
     }
 }
