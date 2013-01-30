@@ -1,7 +1,7 @@
 <include file="public:header" />
 <div id="mainContent" class="wrapper">
 	<div class="toolName">
-		在线JS/CSS/HTML压缩(采用<a id="YUI" href="#####" data-original-title="">YUI Compressor</a>实现)
+		{$title_name}
 	</div>
 	<div class="toolUsing clearfix">
 		<div class="toolsTab clearfix">
@@ -38,14 +38,14 @@ function echo(stringA,stringB){
 		<div class="operateLR">
 			<form style="padding:20px 0 20px 0;" class="well">
 				<div class="input-append">
-					<input type="text" value="5000" class="span1" size="5" id="linebreak" name="linebreak"><span class="add-on">字节换行</span>
+					<input type="text" value="5000" class="span1" size="5" id="linebreak" name="linebreak"><span class="add-on">{:L('byte_newline')}</span>
 				</div>
 				<div style="padding:8px 8px 8px 8px;margin:10px 10px 10px 10px;" class="alert alert-info">
-					<strong>Note:</strong><p>若将此置空则将默认不换行</p>
+					<strong>Note:</strong><p>{:L('js_note')}</p>
 	            </div>
-				<label class="checkbox inline"><input type="checkbox" id="munge" name="munge">JS标识符混淆</label>
-				<button style="margin:0 0 10px 0;" onclick="js_compress();" value=" JS压缩 " type="button" class="btn btn-primary" data-loading-text="正在压缩..." id="js_com">JS压缩<i class="icon-chevron-right icon-white"></i></button>
-				<button onclick="css_compress();" value=" CSS压缩 " type="button" class="btn btn-primary" data-loading-text="正在压缩..." id="css_com">CSS压缩<i class="icon-chevron-right icon-white"></i></button>
+				<label class="checkbox inline"><input type="checkbox" id="munge" name="munge">{:L('js_garble')}</label>
+				<button style="margin:0 0 10px 0;" onclick="js_compress();" value="{:L('js_compression')}" type="button" class="btn btn-primary" data-loading-text="{:L('compression_loading')}..." id="js_com">{:L('js_compression')}<i class="icon-chevron-right icon-white"></i></button>
+				<button onclick="css_compress();" value="{:L('css_compression')}" type="button" class="btn btn-primary" data-loading-text="{:L('compression_loading')}..." id="css_com">{:L('css_compression')}<i class="icon-chevron-right icon-white"></i></button>
 			</form>
 		</div>
 		<div class="rightBar">

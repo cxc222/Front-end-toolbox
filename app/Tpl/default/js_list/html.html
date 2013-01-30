@@ -1,15 +1,64 @@
 <include file="public:header" />
 <div id="mainContent" class="wrapper">
 	<div class="toolName">
-		在线JS/CSS/HTML压缩(采用<a id="YUI" href="#####" data-original-title="">YUI Compressor</a>实现)
+		{$title_name}
 	</div>
 	<div class="toolUsing clearfix">
 		<div class="toolsTab clearfix">
 			<include file="js_list:nav" />
 		</div>
+		<div class="alert alert-info">
+		    <p>主要是把 HTML 代码格式化为当行,去除回车注释等无效字符串以增加网页传速效率. 
+				<code data-original-title=""><a href="http://www.oschina.net/p/nginx" target="_blank" id="ngnix_intro" data-original-title="">Nginx</a></code> , 
+				<code data-original-title=""><a href="http://www.oschina.net/p/apache+http+server" target="_blank" id="apache_intro" data-original-title="">Apache</a></code> 
+				有类似的模块可以直接输出类似的单行 HTML
+			</p>
+		    <p>作者：<code><a href="http://my.oschina.net/samshuai" target="_blank">蟋蟀哥哥</a></code>&nbsp;&nbsp;&nbsp;<code><a href="http://www.osctools.net/jsbin/gnfiywmj/2/edit" target="_blank">源码链接</a></code></p>
+		</div>
+		<div class="leftBar">
+			<textarea name='less' id='source'>/*这里填写代码*/
+<!-- Juest Test -->
+<span id="thx">Welcome to Oschina Tools website</span></textarea>
+		</div>
+		<div class="operateLR">
+			<form style="padding:20px 0 20px 0;" class="well">
+			<button id="html_compress_btn" value="{:L('start_compression')}" type="button" class="btn btn-primary">{:L('start_compression')}</button>
+			<br><br>{:L('original_length')}:<span id="old"></span>
+			<br>{:L('compressed_length')}:<span id="new"></span>
+			<br>{:L('reduced_percentage')}:<span id="range"></span>%
+			</form>
+		</div>
+		<div class="rightBar">
+			<textarea id="result"></textarea>
+		</div>
+		
 	</div>
 	<script>
-
+	$(function(){
+	  $("#html_compress_btn").click(function(){
+	    var source = $("#source").val();
+	    var sourceLength = source.length;
+		if(sourceLength==0){
+			alert("{:L('not_null_html')}");
+			return;
+		}
+		var rep = /\n+/g;
+	    var repone = /<!--.*?-->/ig;
+	    var reptwo = /\/\*.*?\*\//ig;
+	    var reptree = /[ ]+</ig;
+	    var sourceZero = source.replace(rep,"");
+	    var sourceOne = sourceZero.replace(repone,"");
+	    var sourceTwo = sourceOne.replace(reptwo,"");
+	    var sourceTree = sourceTwo.replace(reptree,"&lt;");
+	    $("#result").val(sourceTree);
+		var resultLength = sourceTwo.length;
+		var range = 100-(resultLength/sourceLength*100);
+		$("#old").text(sourceLength);
+	    $("#new").text(resultLength);
+		$("#range").text(range.toFixed(2));
+	    }
+	  );
+	});
 	</script>
 </div>
 <include file="public:footer" />

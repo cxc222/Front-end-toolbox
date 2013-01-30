@@ -1,0 +1,64 @@
+<include file="public:header" />
+<div id="mainContent" class="wrapper">
+	<div class="toolName">
+		{$title_name}
+	</div>
+	<div class="toolUsing clearfix">
+		<div class="toolsTab clearfix">
+			<include file="js_list:nav" />
+		</div>
+		<style>
+			input[type="file"]{margin-left:5px;}
+			.input-append, .input-prepend{font-size:13px;}
+			.updata{line-height:28px;}
+		</style>
+		<div class="wrapper">
+			<form enctype="multipart/form-data" style="margin-top:20px;width:500px;" class="well" method="POST" action="/action/jscompress/multi_js_compress" id="upload_form">
+				<div class="alert alert-info">
+					上传的js文件应该是UTF-8编码。
+				</div>
+				
+				<div style="margin-bottom:20px;" class="input-prepend">
+					<span class="add-on">每</span><input type="text" value="5000" class="span1" size="5" name="linebreak"><span class="add-on">个字节换行</span>
+					<label style="margin-left:20px;" class="checkbox inline"><input type="checkbox" id="munge" name="munge">JS标识符混淆</label>
+				</div>
+				<div style="margin-bottom:15px;" class="input-prepend file_input updata">
+					<span class="add-on">js文件:</span><input type="file" accept="application/x-javascript" name="file">
+					<a style="margin-left:10px;display:none;" onclick="del_file(this);return false;" href="javascript:;">删除</a>
+				</div>
+				<div style="margin-bottom:15px;" class="input-prepend file_input updata">
+					<span class="add-on">js文件:</span><input type="file" accept="application/x-javascript" name="file2">
+					<a style="margin-left:10px;" onclick="del_file(this);return false;" href="javascript:;">删除</a>
+				</div>
+				<a class="btn btn-success" onclick="add_file(this);return false;" href="javascript:;">添加一个文件</a>
+				<input type="submit" value="合并压缩" style="float:right;" class="btn btn-primary">
+			</form>
+		</div>
+		
+	</div>
+	<script>
+	var f_idx=2;
+	function add_file(){
+		var fi=$(".file_input:last").clone();
+		$(".file_input:last").after(fi);
+		f_idx++;
+		$(".file_input:last input").attr("name","file"+f_idx);
+		$(".file_input:last a").show();
+		return;
+	}
+
+	function del_file(s){
+		$(s).parent("div").remove();
+	}
+	$(document).ready(function (){
+		/* $("#upload_form").ajaxForm({
+			success: function (msg){
+				msg= eval('(' + msg + ')');
+				if(msg.msg)
+					alert("错误 ： "+msg.msg);
+			}
+		}); */
+	});
+	</script>
+</div>
+<include file="public:footer" />

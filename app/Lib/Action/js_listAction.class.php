@@ -7,12 +7,14 @@
 class js_listAction extends baseAction {
 	
 	public function _initialize(){
+		$title_name = '在线JS/CSS/HTML压缩(采用<a id="YUI" href="#####" data-original-title="">YUI Compressor</a>实现)';
 		//定义动作 
 		$action = array(
 				'jscompress' => L('js_css_compression'),
 				'html'	=> L('html_compression'),
 				'much_js_compression'	=> L('much_js_compression')
 		);
+		$this->assign('title_name', $title_name);
 		$this->assign('action', $action);
 	}
 	
@@ -104,6 +106,10 @@ class js_listAction extends baseAction {
     	$this->display();
     }
     
+    //多个js压缩
+    function much_js_compression(){
+    	$this->display();
+    }
     //调试 
     function c_debug(){
     	$de = "D:/xampp/htdocs/Front-end-toolbox/jar/jdk1.7.0_09/bin/java.exe -jar D:/xampp/htdocs/Front-end-toolbox/jar/yuicompressor-2.4.7.jar --type js --charset utf-8 D:/xampp/htdocs/Front-end-toolbox/temp/js/1359516817.js > D:/xampp/htdocs/Front-end-toolbox/temp/js/1359516817.min.js";
