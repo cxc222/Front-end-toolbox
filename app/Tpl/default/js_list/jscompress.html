@@ -5,17 +5,7 @@
 	</div>
 	<div class="toolUsing clearfix">
 		<div class="toolsTab clearfix">
-			<ul class="nav nav-tabs">
-				<li class="active">
-					<a onclick="javascript:location.href='/jscompress'">{:L('js_css_compression')}</a>
-				</li>
-				<li>
-					<a onclick="javascript:location.href='/jscompress'">{:L('html_compression')}</a>
-				</li>
-				<li>
-					<a onclick="javascript:location.href='/jscompress'">{:L('much_js_compression')}</a>
-				</li>
-			</ul>
+			<include file="js_list:nav" />
 		</div>
 		<link href="__ROOT__/resources/js/codemirror/codemirror.css" rel="stylesheet" type="text/css"/>
 		<script language="javascript" type="text/javascript" src="__ROOT__/resources/js/codemirror/codemirror.js"></script>

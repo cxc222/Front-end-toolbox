@@ -1,0 +1,11 @@
+<div class="toolUsing clearfix">
+	<div class="toolsTab clearfix">
+		<ul class="nav nav-tabs">
+			<foreach name="action" item="val" >
+			<li class="<if condition="$key eq ACTION_NAME">active</if>">
+				<a  onclick=javascript:location.href="{:U(MODULE_NAME.'/'.$key)}">{$val}</a>
+			</li>
+			</foreach>
+		</ul>
+	</div>
+</div>

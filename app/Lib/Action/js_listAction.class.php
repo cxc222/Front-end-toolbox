@@ -6,6 +6,16 @@
  */
 class js_listAction extends baseAction {
 	
+	public function _initialize(){
+		//定义动作 
+		$action = array(
+				'jscompress' => L('js_css_compression'),
+				'html'	=> L('html_compression'),
+				'much_js_compression'	=> L('much_js_compression')
+		);
+		$this->assign('action', $action);
+	}
+	
     public function index(){
     	$datalist = C('data_list');
     	$this->assign('data_list', $datalist);
@@ -86,6 +96,11 @@ class js_listAction extends baseAction {
     		}
     		
     	}
+    	$this->display();
+    }
+    
+    //压缩html
+    function html(){
     	$this->display();
     }
     
