@@ -13,6 +13,11 @@ return array(
 		'original_length'	=> '原始长度',
 		'compressed_length'	=> '压缩后长度',
 		'reduced_percentage'	=> '缩小百分比',
-		'not_null_html'	=> '待压缩的HTML不能为空！'
+		'not_null_html'	=> '待压缩的HTML不能为空！',
+		
+		'up_js_note'	=> '上传的js文件应该是UTF-8编码。',
+		'add_file'	=> '添加一个文件',
+		'js_file'	=> 'js文件',
+		'merger_compression'	=> '合并压缩'
 		
 );
