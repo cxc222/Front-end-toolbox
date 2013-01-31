@@ -12,6 +12,12 @@ return array (
 							),
 						
 					),
-				
+				'transform'	=> array(
+						'title'	=> '加密/转码工具',
+						'data'	=> array(
+								array('act'	=> 'generate_qrcode', 'title'	=> '生成QrCode'),
+								array('act' => 'decryption_qrcode', 'title'	=> '解密QrCode')
+							),
+					),
 		)
 	);
