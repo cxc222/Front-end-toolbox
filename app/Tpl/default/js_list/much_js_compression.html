@@ -52,13 +52,11 @@
 		$(s).parent("div").remove();
 	}
 	$(document).ready(function (){
-		 $("#upload_form").ajaxForm({
-			 dataType:json,
-			 success: function (msg){
-				 msg= eval('(' + msg + ')');
-				 if(msg.msg)
-					 alert("错误 ： "+msg.msg);
-				 }
+		$("#upload_form").ajaxForm({
+			dataType:json,
+				success: function (msg){
+					//document.write(msg);
+				}
 		});
 	});
 	</script>

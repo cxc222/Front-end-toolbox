@@ -40,7 +40,6 @@ class js_listAction extends baseAction {
     			$content = $_POST['js'];
     			fwrite($fp,$content);
     			fclose($fp);
-    			
     			import("@.Action.yui-compressor");
     			$yui = new yuicompressor(array(
     					'java_home'=>C('yuicompressor.java_home'), //或自己指定 jdk 安装的 bin 目录 (绝对路径)
@@ -112,23 +111,18 @@ class js_listAction extends baseAction {
     function much_js_compression(){
     	if ($this->isPost()) {
     		if (!empty($_FILES)) {
-    			session('[start]');
-    			session('id',time());
-    			$this->path = './temp/js/'.session('id').'/';
-    			$path_all = ROOT_PATH.'/temp/js/'.session('id').'_all/';
-    			
-    			
+    			$this->path = 'temp/js/'.time().'/';
     			$file_info = $this->_upload();
-    			
     			if($file_info){
     				$paths;
     				foreach ($file_info as $k => $t){
     					$paths[$k] = $t['savepath'].$t['savename'];
     				}
-    				
     				import("@.ORG.miniJs.miniJsCss");
     				$miniJsCss = new miniJsCss();
     			 	$minjs = $miniJsCss -> show( join(',', $paths) );
+    			 	$this->_del_directory(ROOT_PATH.'/'.$this->path);	//删除临时文件
+    			 	
     			 	$filename = 'all.js';
     			 	header('Pragma: public');
     			 	header('Last-Modified: '.gmdate('D, d M Y H:i:s') . ' GMT');
@@ -141,7 +135,6 @@ class js_listAction extends baseAction {
     			 	header('Content-Disposition: attachment; filename="'.$filename.'"');
     			 	
     				echo $minjs;
-    				//print_r($minjs);
     				die();
     				/* $filename = time();
     				foreach ($file_info as $k => $info){
@@ -153,7 +146,7 @@ class js_listAction extends baseAction {
     					fclose($fp);
     				}
     				 */
-    				import("@.Action.yui-compressor");
+    				/* import("@.Action.yui-compressor");
     				$yui = new yuicompressor(array(
     						'java_home'=>C('yuicompressor.java_home'), //或自己指定 jdk 安装的 bin 目录 (绝对路径)
     						'jar_file' =>C('yuicompressor.jar_file'),
@@ -167,15 +160,14 @@ class js_listAction extends baseAction {
     						'optimizations'=>false, //禁止优化代码.
     				));
     				$resutlt = $yui->directory($this->path);
-    				print_r($resutlt);
+    				print_r($resutlt); */
     			}
     			//print_r($file_info);
-    			die();
+    			//die();
     		}
     	}
     	$this->display();
     }
-    
     
     // 文件上传
     protected function _upload() {
@@ -200,6 +192,28 @@ class js_listAction extends baseAction {
     		$uploadList = $upload->getUploadFileInfo();
     	}
     	return $uploadList;
+    }
+    
+    //删除目录 末尾必须要 带 '/'
+    protected function _del_directory($path)
+    {
+    	if(is_dir($path))
+    	{
+    		$file_list= scandir($path);
+    		foreach ($file_list as $file)
+    		{
+    			if( $file!='.' && $file!='..')
+    			{
+    				$this->_del_directory($path.$file);
+    			}
+    		}
+    		@rmdir($path);  //这种方法不用判断文件夹是否为空,	因为不管开始时文件夹是否为空,到达这里的时候,都是空的
+    	}
+    	else
+    	{
+    		@unlink($path);    //这两个地方最好还是要用@屏蔽一下warning错误,看着闹心
+    	}
+    
     }
     //调试 
     function c_debug(){
