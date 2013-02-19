@@ -1,0 +1,124 @@
+<include file="public:header" />
+<div id="mainContent" class="wrapper">
+	<div class="toolName">
+		{$title_name}
+	</div>
+	<div class="toolUsing clearfix">
+		<div class="toolsTab clearfix">
+			<include file="js_list:nav" />
+		</div>
+		<style>
+			.leftBar .title,.rightBar .title,.topBar .title{margin-bottom:10px;}
+			.bottomBar .title{margin:10px 0;}
+			.topBar input[type='submit']{margin-left:10px;}
+			.OptDetail{text-align:center;margin-left:30px;}
+			.OptDetail li{width:120px;margin:5px 0px 10px 0px;}
+			.OptDetail select{margin:5px 0px 10px 0px;text-align:center; padding:4px 4px}
+			#pwd{width:110px;}
+			#qrcode img{margin:auto;}
+			.QRCodeDiv{border:1px solid #ccc;width:430px;height:500px;background-color:#eee;text-align:center;}
+			.QRWrapper{height:500px;display:inline-block;line-height:500px;}
+			.QRWrapper img{vertical-align:middle;}
+			button.btn, input.btn[type="submit"]{font-size:13px; padding:4px 10px;}
+		</style>
+		<form method="post" id="qrcode_form" action="__URL__/generate">
+	    	<div class="leftBar">
+			<div class="title">URL或其他文本:</div>
+			<textarea onblur="(this.value=='')?this.value='http://tool.qdzff.com/':this.value;" onfocus="if(this.value=='http://tool.qdzff.com/'){this.value='';};this.select();" name="data" class="input-xlarge">http://tool.qdzff.com/</textarea>
+    	</div>
+    	<div class="operateLR">
+            <div class="OptDetail span1">
+            	<label>输出格式:</label>
+                <select class="span1" name="output">
+                    <option value="gif">GIF</option>
+                    <option value="jpeg">JPEG</option>
+                    <option selected="" value="png">PNG</option>
+                </select>
+                <label>纠错级别:</label>
+                <select class="span1" name="error">
+                    <option selected="" value="L">L 7%</option>
+                    <option value="M">M 15%</option>
+                    <option value="Q">Q 25%</option>
+                    <option value="H">H 30%</option>
+                </select>
+                <label>边缘留白:</label>
+    			<select class="span1" name="margin">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value="25">25</option>
+                    <option value="26">26</option>
+                    <option value="27">27</option>
+                    <option value="28">28</option>
+                    <option value="29">29</option>
+                    <option value="30">30</option>
+                    <option value="31">31</option>
+                    <option value="32">32</option>
+                </select>
+                <label>原胞大小:</label>
+    			<select class="span1" name="size">
+                     <option value="1">1</option>
+                     <option value="2">2</option>
+                     <option value="3">3</option>
+                     <option selected="" value="4">4</option>
+     			</select>
+				<button onclick="return false;" id="submit" class="btn btn-primary" style="width:80px;">生成QR码</button>            </div>
+    	</div>
+    	<div class="rightBar">
+						<div class="title">QR码：</div>
+            <div class="QRCodeDiv">
+				<div class="QRWrapper">
+					<a target="_blank" href="__URL__/generate" id="gen_url"><img src="__URL__/generate"></a>
+				</div>
+			</div>
+    	</div>
+	    </form>
+		
+	</div>
+	<script>
+	var f_idx=2;
+	function add_file(){
+		var fi=$(".file_input:last").clone();
+		$(".file_input:last").after(fi);
+		f_idx++;
+		$(".file_input:last input").attr("name","file[]");
+		$(".file_input:last a").show();
+		return;
+	}
+
+	function del_file(s){
+		$(s).parent("div").remove();
+	}
+	$(document).ready(function (){
+		$("#upload_form").ajaxForm({
+			dataType:json,
+				success: function (msg){
+					//document.write(msg);
+				}
+		});
+	});
+	</script>
+</div>
+<include file="public:footer" />

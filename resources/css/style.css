@@ -1,4 +1,5 @@
 @CHARSET "UTF-8";
+label,input,button,select,textarea{font-size:13px;}
 #header {height: 50px;position: relative;z-index: 1; width: 100%; background: #006CBF; -webkit-box-shadow:0 3px 4px #C7D9E1; -moz-box-shadow:0 3px 4px #C7D9E1; box-shadow: 0 3px 4px #C7D9E1}
 .wrapper {margin: 0 auto;width: 1000px;}
 .texthidden {
@@ -88,7 +89,7 @@
     float: left;
     margin: 30px 5px 0;
     text-align: center;
-    width: 136px;
+    width: 130px;
 }
 .leftBar textarea, .rightBar textarea {
     height: 500px;

@@ -4,3 +4,6 @@
 /jar/jdk1.7.0_09
 /jar/jdk1.7.0_09
 /app/Runtime
+/app/Lib/ORG/phpqrcode/cache
+/app/Lib/ORG/phpqrcode/temp
+/app/Lib/ORG/phpqrcode/cache
