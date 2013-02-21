@@ -17,11 +17,11 @@
 			#pwd{width:110px;}
 			#qrcode img{margin:auto;}
 			.QRCodeDiv{border:1px solid #ccc;width:430px;height:500px;background-color:#eee;text-align:center;}
-			.QRWrapper{height:500px;display:inline-block;line-height:500px;}
+			.QRWrapper{height:auto;display:inline-block;line-height:500px;}
 			.QRWrapper img{vertical-align:middle;}
 			button.btn, input.btn[type="submit"]{font-size:13px; padding:4px 10px;}
 		</style>
-		<form method="post" id="qrcode_form" action="__URL__/generate">
+		<form method="post" id="qrcode_form" >
 	    	<div class="leftBar">
 			<div class="title">URL或其他文本:</div>
 			<textarea onblur="(this.value=='')?this.value='http://tool.qdzff.com/':this.value;" onfocus="if(this.value=='http://tool.qdzff.com/'){this.value='';};this.select();" name="data" class="input-xlarge">http://tool.qdzff.com/</textarea>
@@ -30,8 +30,6 @@
             <div class="OptDetail span1">
             	<label>输出格式:</label>
                 <select class="span1" name="output">
-                    <option value="gif">GIF</option>
-                    <option value="jpeg">JPEG</option>
                     <option selected="" value="png">PNG</option>
                 </select>
                 <label>纠错级别:</label>
@@ -83,6 +81,10 @@
                      <option value="2">2</option>
                      <option value="3">3</option>
                      <option selected="" value="4">4</option>
+                     <option value="5">5</option>
+                     <option value="6">6</option>
+                     <option value="7">7</option>
+                     <option value="8">8</option>
      			</select>
 				<button onclick="return false;" id="submit" class="btn btn-primary" style="width:80px;">生成QR码</button>            </div>
     	</div>
@@ -90,7 +92,7 @@
 						<div class="title">QR码：</div>
             <div class="QRCodeDiv">
 				<div class="QRWrapper">
-					<a target="_blank" href="__URL__/generate" id="gen_url"><img src="__URL__/generate"></a>
+					<a target="_blank" href="__URL__/generate" id="gen_url"><img src="__URL__/generate" /></a>
 				</div>
 			</div>
     	</div>
@@ -98,26 +100,14 @@
 		
 	</div>
 	<script>
-	var f_idx=2;
-	function add_file(){
-		var fi=$(".file_input:last").clone();
-		$(".file_input:last").after(fi);
-		f_idx++;
-		$(".file_input:last input").attr("name","file[]");
-		$(".file_input:last a").show();
-		return;
-	}
-
-	function del_file(s){
-		$(s).parent("div").remove();
-	}
-	$(document).ready(function (){
-		$("#upload_form").ajaxForm({
-			dataType:json,
-				success: function (msg){
-					//document.write(msg);
-				}
-		});
+	$(document).ready(function(){
+		$("#submit").click(function(){
+			console.log($("#qrcode_form").serialize());
+			var url = "{:U(MODULE_NAME.'/generate')}&" + $("#qrcode_form").serialize();
+			
+			$(".QRCodeDiv img").attr("src",url+"&"+new Date().getTime());
+			$("#gen_url").attr("href",url);
+		}); 
 	});
 	</script>
 </div>
